@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "creator-breakout-finder"
-version = "0.1.0"
-description = "Paste a creator profile URL and find posts that beat the creator's own baseline."
+version = "0.1.1"
+description = "Find creator posts whose likes or views far exceed their usual level."
 readme = "README.md"
 requires-python = ">=3.11"
 license = "MIT"

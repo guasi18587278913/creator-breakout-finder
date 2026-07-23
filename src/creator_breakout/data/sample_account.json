@@ -7,7 +7,7 @@
   "followers": 18600,
   "posts": [
     {"id": "20", "title": "我把 30 天创作复盘做成了一张图", "url": "https://example.com/posts/20", "published_at": "2026-07-20T08:00:00Z", "likes": 1200, "views": 68000, "comments": 96, "shares": 143, "saves": 210},
-    {"id": "19", "title": "别再抄大号了，先找到你自己的异常值", "url": "https://example.com/posts/19", "published_at": "2026-07-18T08:00:00Z", "likes": 780, "views": 42000, "comments": 73, "shares": 101, "saves": 166},
+    {"id": "19", "title": "别再抄大号了，先看哪些内容明显高于平时", "url": "https://example.com/posts/19", "published_at": "2026-07-18T08:00:00Z", "likes": 780, "views": 42000, "comments": 73, "shares": 101, "saves": 166},
     {"id": "18", "title": "一个小账号第一次破圈时，通常改变了什么", "url": "https://example.com/posts/18", "published_at": "2026-07-16T08:00:00Z", "likes": 420, "views": 23000, "comments": 41, "shares": 55, "saves": 89},
     {"id": "17", "title": "今天的内容工作台更新记录", "url": "https://example.com/posts/17", "published_at": "2026-07-14T08:00:00Z", "likes": 180, "views": 9800, "comments": 15, "shares": 13, "saves": 25},
     {"id": "16", "title": "做账号研究时我固定会问的五个问题", "url": "https://example.com/posts/16", "published_at": "2026-07-12T08:00:00Z", "likes": 160, "views": 8900, "comments": 19, "shares": 17, "saves": 32},

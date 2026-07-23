@@ -1,6 +1,6 @@
 # Creator Breakout Finder
 
-粘贴一个创作者主页链接，找到真正跑赢他自己的作品。
+粘贴账号主页，找出点赞远高于平时的作品。
 
 [![CI](https://github.com/guasi18587278913/creator-breakout-finder/actions/workflows/ci.yml/badge.svg)](https://github.com/guasi18587278913/creator-breakout-finder/actions/workflows/ci.yml)
 [![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-3776AB)](https://www.python.org/)
@@ -8,18 +8,18 @@
 
 ![Creator Breakout Finder 演示页面](docs/creator-breakout-finder.png)
 
-## 为什么做这个工具
+## 它能帮你做什么
 
-研究对标账号时，只看播放量或点赞量很容易被账号体量骗到。一个大号的 10 万赞，可能只是日常发挥；一个小号的 2,000 赞，却可能是一次值得拆解的异常突破。
+研究对标账号时，你真正想知道的不是“哪条点赞最高”，而是“哪条明显超过了这个账号平时的表现”。
 
-Creator Breakout Finder 不拿不同账号横向硬比。它读取一个账号最近的公开作品，用这个账号自己的历史中位数建立基线，再找出显著高于其日常水平的作品。
+Creator Breakout Finder 会读取账号最近的公开作品，和他自己的日常数据对比，找出值得进一步拆解的选题、标题和内容结构。小红书、抖音、TikTok 和 X 看点赞，B站和 YouTube 看播放。
 
 ## 能做什么
 
 - 识别小红书、抖音、B站、TikTok、YouTube 和 X 的完整创作者主页链接
 - 通过用户自己的 [TikHub](https://docs.tikhub.io/) Key 读取最近公开作品
-- 用中位数建立账号自身基线，降低少数超级爆款对基线的干扰
-- 同时检查基线倍数、历史分位和绝对量下限，减少小样本误报
+- 估算这个账号平时每条作品的表现，不拿不同体量的账号硬比
+- 标出至少达到平时 2 倍、并排进近期作品前 10% 的内容
 - 展示判断置信度，并导出 Markdown 研究报告和 CSV 全量样本
 - 内置完全离线的虚构演示数据，不配置 Key 也能体验完整流程
 
@@ -66,7 +66,7 @@ TIKHUB_API_KEY=你的_TikHub_Key
 
 工具有意拒绝作品链接、短链接、非 HTTPS 链接和带账号密码或自定义端口的 URL。TikHub 接口及各平台数据可用性会随服务商和平台变化；这个项目不绕过登录、隐私设置或平台访问限制。
 
-## 爆款怎么判断
+## 怎么判断一条作品明显高于平时
 
 默认分析最近 30 条带有效指标的作品，至少需要 5 条样本；X 的纯转推不会被当成账号自己的作品。候选作品必须同时满足：
 
@@ -88,7 +88,7 @@ TIKHUB_API_KEY=你的_TikHub_Key
 
 ## 局限
 
-这是一次性历史快照，不是等龄增长曲线。旧作品天然有更长时间积累播放和互动，因此结果适合做“值得进一步研究的异常候选”，不能证明爆款原因，也不能等同于实时增长速度。私密、删除、接口未返回或缺少指标的作品不会进入样本。
+这是一次性历史快照，不是等龄增长曲线。旧作品天然有更长时间积累播放和互动，因此结果适合用来筛选“值得进一步研究的作品”，不能证明走红原因，也不能等同于实时增长速度。私密、删除、接口未返回或缺少指标的作品不会进入样本。
 
 ## 开发与测试
 
@@ -102,7 +102,7 @@ uv run pytest
 
 - `links.py`：严格解析和标准化主页链接
 - `providers/tikhub.py`：BYOK TikHub 适配与六平台数据归一化
-- `scoring.py`：创作者自身基线与异常作品判定
+- `scoring.py`：账号日常水平与高表现作品判定
 - `report.py`：Markdown 和 CSV 导出
 - `app.py`：Streamlit 单页界面
 

@@ -39,9 +39,14 @@ def result() -> AnalysisResult:
 def test_markdown_report_is_readable_and_escapes_table_content():
     output = to_markdown(result())
 
+    assert "高表现作品报告" in output
+    assert "平时每条" in output
+    assert "明显高于平时的作品" in output
     assert "Creator \\| Demo" in output
     assert "A title \\| with a pipe and a newline" in output
     assert "3.00×" in output
+    assert "日常基线" not in output
+    assert "历史分位" not in output
     assert "TikHub API Key" not in output
 
 
