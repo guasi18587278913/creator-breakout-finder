@@ -52,24 +52,24 @@ def _number(value: float | int) -> str:
 def to_markdown(result: AnalysisResult) -> str:
     creator = result.creator
     lines = [
-        f"# {_cell(creator.name)} 的历史爆款报告",
+        f"# {_cell(creator.name)} 的高表现作品报告",
         "",
         f"- 主页：{_cell(creator.homepage_url)}",
         f"- 平台：{_cell(creator.platform)}",
         f"- 有效样本：{result.sample_size} 条",
-        f"- 日常基线：{_number(result.baseline)} {result.metric_label}",
+        f"- 平时每条：{_number(result.baseline)} {result.metric_label}",
         f"- 置信度：{_CONFIDENCE_LABELS[result.confidence]}",
-        f"- 爆款：{len(result.breakouts)} 条",
+        f"- 明显高于平时：{len(result.breakouts)} 条",
         "",
-        "## 跑赢自身基线的作品",
+        "## 明显高于平时的作品",
         "",
     ]
     if not result.breakouts:
-        lines.append("本次样本中没有作品同时达到 2 倍基线、历史前 10% 和绝对量下限。")
+        lines.append("本次样本中没有找到明显高于账号平时水平的作品。")
     else:
         lines.extend(
             [
-                f"| 日期 | 作品 | 当前{result.metric_label} | 基线 | 倍数 | 历史分位 |",
+                f"| 日期 | 作品 | 本条{result.metric_label} | 平时每条 | 高出平时 | 账号内排名 |",
                 "| --- | --- | ---: | ---: | ---: | ---: |",
             ]
         )
@@ -86,10 +86,12 @@ def to_markdown(result: AnalysisResult) -> str:
             "",
             "## 判定方法",
             "",
-            "使用最近 30 条带有效指标的作品建立中位数基线；候选作品必须达到基线 2 倍、"
-            "进入历史前 10%，并通过最低绝对量门槛。YouTube 与 B站使用播放量，其余平台使用点赞量。",
+            "读取最近 30 条带有效指标的作品，用中位数估算账号平时每条的表现。候选作品必须"
+            "达到平时 2 倍、进入样本前 10%，并通过最低数据门槛。YouTube 与 B站使用播放量，"
+            "其余平台使用点赞量。",
             "",
-            "> 这是一次性历史快照，只说明异常表现，不代表因果，也不等同于实时增长速度。",
+            "> 这是一次性历史快照，只说明作品数据明显高于平时，不代表因果，"
+            "也不等同于实时增长速度。",
         ]
     )
     return "\n".join(lines) + "\n"

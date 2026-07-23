@@ -59,7 +59,7 @@ st.markdown(
       .stApp { background: #f7f3e9; color: #19201b; }
       .block-container { max-width: 1120px; padding-top: 3.2rem; padding-bottom: 5rem; }
       h1, h2, h3 { letter-spacing: -0.03em; }
-      h1 { font-size: clamp(2.7rem, 6vw, 5.4rem) !important; line-height: .95 !important; }
+      h1 { font-size: clamp(2.7rem, 5vw, 4.8rem) !important; line-height: 1 !important; }
       [data-testid="stMetric"] { background: rgba(255,255,255,.62); border: 1px solid #d8d0bf;
         border-radius: 12px; padding: 1rem 1.1rem; }
       [data-testid="stForm"] { background: #fffdf7; border: 1px solid #cfc5b1;
@@ -74,11 +74,14 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-st.markdown('<div class="eyebrow">Creator intelligence · Open source</div>', unsafe_allow_html=True)
-st.title("找到真正跑赢他自己的作品")
+st.markdown('<div class="eyebrow">对标账号分析 · 开源工具</div>', unsafe_allow_html=True)
 st.markdown(
-    '<p class="lead">粘贴一个创作者主页，不拿他和全网大号硬比。'
-    "工具会用这个账号自己的历史中位数建立基线，找出异常跑出的作品。</p>",
+    "<h1>粘贴账号主页，<br>找出点赞远高于平时的作品</h1>",
+    unsafe_allow_html=True,
+)
+st.markdown(
+    '<p class="lead">工具会对比账号最近 30 条公开作品。小红书、抖音、TikTok 和 X 看点赞，'
+    "B站和 YouTube 看播放，帮你快速找到值得拆解的选题、标题和内容结构。</p>",
     unsafe_allow_html=True,
 )
 
@@ -88,21 +91,21 @@ if st.query_params.get("demo") == "1" and "analysis_result" not in st.session_st
 
 with st.form("analysis-form"):
     url = st.text_input(
-        "创作者主页链接",
+        "对标账号主页链接",
         value="https://x.com/openai",
         placeholder="支持小红书、抖音、B站、TikTok、YouTube 和 X",
         help="只接受完整的 HTTPS 创作者主页，不接受作品链接或短链接。",
     )
     use_demo = st.checkbox(
-        "使用虚构演示数据（不调用 TikHub）",
+        "先用示例账号体验（不会调用 TikHub）",
         value=not has_key,
         help="演示数据完全离线，不包含任何真实账号信息。",
     )
-    submitted = st.form_submit_button("开始寻找异常作品", type="primary", width="stretch")
+    submitted = st.form_submit_button("分析这个账号", type="primary", width="stretch")
 
 if submitted:
     try:
-        with st.spinner("正在建立这个账号的历史基线…"):
+        with st.spinner("正在对比这个账号最近的作品…"):
             st.session_state["analysis_result"] = _fetch_and_analyze(url, use_demo)
         st.session_state.pop("analysis_error", None)
     except (ValueError, MissingApiKey, TikHubError, InsufficientSampleError) as error:
@@ -110,7 +113,7 @@ if submitted:
         st.session_state.pop("analysis_result", None)
     except Exception:
         st.session_state["analysis_error"] = (
-            "分析失败，请稍后重试。为保护你的密钥，详细异常不会显示在页面上。"
+            "分析失败，请稍后重试。为保护你的密钥，详细错误不会显示在页面上。"
         )
         st.session_state.pop("analysis_result", None)
 
@@ -118,7 +121,7 @@ if error_message := st.session_state.get("analysis_error"):
     st.error(error_message)
 
 if not has_key:
-    st.info("当前未读取到 TIKHUB_API_KEY。你可以先跑演示；真实分析需要把自己的 Key 写进本地 .env。")
+    st.info("当前展示的是示例数据。分析真实账号，需要把你自己的 TikHub Key 写入本地 .env。")
 else:
     st.caption(
         "已从本地环境读取 TikHub Key。Key 不会进入页面、报告或仓库。真实请求可能产生 TikHub 费用。"
@@ -133,23 +136,23 @@ if result is not None:
     st.caption(f"样本主页：{creator.homepage_url}")
 
     metric_columns = st.columns(4)
-    metric_columns[0].metric("有效样本", f"{result.sample_size} 条")
-    metric_columns[1].metric("日常基线", f"{_format_number(result.baseline)} {result.metric_label}")
-    metric_columns[2].metric("异常作品", f"{len(result.breakouts)} 条")
-    metric_columns[3].metric("判断置信度", CONFIDENCE_LABELS[result.confidence])
+    metric_columns[0].metric("已分析作品", f"{result.sample_size} 条")
+    metric_columns[1].metric("平时每条", f"{_format_number(result.baseline)} {result.metric_label}")
+    metric_columns[2].metric("明显高于平时", f"{len(result.breakouts)} 条")
+    metric_columns[3].metric("样本可信度", CONFIDENCE_LABELS[result.confidence])
 
-    breakout_tab, sample_tab, method_tab = st.tabs(["异常作品", "全部样本", "判定方法"])
+    breakout_tab, sample_tab, method_tab = st.tabs(["高表现作品", "全部作品", "怎么判断"])
     with breakout_tab:
         if not result.breakouts:
-            st.success("这批样本里没有作品同时越过三道门槛。没有异常，也是一条有用结论。")
+            st.success("这批作品里没有找到明显高于账号平时水平的内容。")
         else:
             rows = [
                 {
                     "作品": item.post.title,
-                    f"当前{result.metric_label}": item.value,
-                    "自身基线": item.baseline,
-                    "基线倍数": item.multiple,
-                    "历史分位": item.percentile / 100,
+                    f"本条{result.metric_label}": item.value,
+                    "平时每条": item.baseline,
+                    "高出平时": item.multiple,
+                    "账号内排名": item.percentile / 100,
                     "原帖": item.post.url,
                 }
                 for item in result.breakouts
@@ -160,10 +163,10 @@ if result is not None:
                 width="stretch",
                 column_config={
                     "作品": st.column_config.TextColumn(width="large"),
-                    f"当前{result.metric_label}": st.column_config.NumberColumn(format="localized"),
-                    "自身基线": st.column_config.NumberColumn(format="localized"),
-                    "基线倍数": st.column_config.NumberColumn(format="%.2f×"),
-                    "历史分位": st.column_config.ProgressColumn(
+                    f"本条{result.metric_label}": st.column_config.NumberColumn(format="localized"),
+                    "平时每条": st.column_config.NumberColumn(format="localized"),
+                    "高出平时": st.column_config.NumberColumn(format="%.2f×"),
+                    "账号内排名": st.column_config.ProgressColumn(
                         min_value=0, max_value=1, format="percent"
                     ),
                     "原帖": st.column_config.LinkColumn(display_text="打开 ↗"),
@@ -189,11 +192,11 @@ if result is not None:
     with sample_tab:
         all_rows = [
             {
-                "异常": "是" if item.is_breakout else "否",
+                "明显高于平时": "是" if item.is_breakout else "否",
                 "作品": item.post.title,
                 result.metric_label: item.value,
-                "倍数": item.multiple,
-                "分位": f"{item.percentile:.1f}%",
+                "高出平时": item.multiple,
+                "账号内排名": f"{item.percentile:.1f}%",
                 "原帖": item.post.url,
             }
             for item in result.scored
@@ -212,11 +215,12 @@ if result is not None:
         st.markdown(
             """
             1. 读取最近 30 条带有效指标的公开作品。
-            2. 用中位数代表账号的日常水平，避免少量超级爆款拉高基线。
-            3. 候选作品必须同时满足：达到基线 2 倍、进入历史前 10%、越过绝对量下限。
+            2. 用中位数估算这个账号平时每条能拿到多少赞或播放。
+            3. 一条作品必须至少达到平时的 2 倍、排进样本前 10%，并超过最低数据门槛。
             4. YouTube 和 B站使用播放量，其余平台使用点赞量。
 
-            这是一次性历史快照。它能发现异常表现，但不能证明爆款原因，也不等同于实时增长速度。
+            这是一次性历史快照。它能找出数据明显高于平时的作品，但不能证明走红原因，
+            也不等同于实时增长速度。
             """
         )
 
