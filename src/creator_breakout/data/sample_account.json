@@ -1,0 +1,30 @@
+{
+  "platform": "x",
+  "uid": "demo_creator",
+  "handle": "demo_creator",
+  "name": "示例创作者（虚构数据）",
+  "homepage_url": "https://x.com/demo_creator",
+  "followers": 18600,
+  "posts": [
+    {"id": "20", "title": "我把 30 天创作复盘做成了一张图", "url": "https://example.com/posts/20", "published_at": "2026-07-20T08:00:00Z", "likes": 1200, "views": 68000, "comments": 96, "shares": 143, "saves": 210},
+    {"id": "19", "title": "别再抄大号了，先找到你自己的异常值", "url": "https://example.com/posts/19", "published_at": "2026-07-18T08:00:00Z", "likes": 780, "views": 42000, "comments": 73, "shares": 101, "saves": 166},
+    {"id": "18", "title": "一个小账号第一次破圈时，通常改变了什么", "url": "https://example.com/posts/18", "published_at": "2026-07-16T08:00:00Z", "likes": 420, "views": 23000, "comments": 41, "shares": 55, "saves": 89},
+    {"id": "17", "title": "今天的内容工作台更新记录", "url": "https://example.com/posts/17", "published_at": "2026-07-14T08:00:00Z", "likes": 180, "views": 9800, "comments": 15, "shares": 13, "saves": 25},
+    {"id": "16", "title": "做账号研究时我固定会问的五个问题", "url": "https://example.com/posts/16", "published_at": "2026-07-12T08:00:00Z", "likes": 160, "views": 8900, "comments": 19, "shares": 17, "saves": 32},
+    {"id": "15", "title": "周末读到的三条创作笔记", "url": "https://example.com/posts/15", "published_at": "2026-07-10T08:00:00Z", "likes": 150, "views": 8200, "comments": 11, "shares": 9, "saves": 21},
+    {"id": "14", "title": "为什么中位数比平均数更适合看账号", "url": "https://example.com/posts/14", "published_at": "2026-07-08T08:00:00Z", "likes": 145, "views": 7900, "comments": 17, "shares": 14, "saves": 29},
+    {"id": "13", "title": "本周值得关注的 AI 产品", "url": "https://example.com/posts/13", "published_at": "2026-07-06T08:00:00Z", "likes": 140, "views": 7700, "comments": 12, "shares": 10, "saves": 18},
+    {"id": "12", "title": "从收藏夹到选题库，我删掉了哪些步骤", "url": "https://example.com/posts/12", "published_at": "2026-07-04T08:00:00Z", "likes": 135, "views": 7500, "comments": 10, "shares": 11, "saves": 31},
+    {"id": "11", "title": "创作者如何建立自己的信息源", "url": "https://example.com/posts/11", "published_at": "2026-07-02T08:00:00Z", "likes": 130, "views": 7200, "comments": 13, "shares": 12, "saves": 27},
+    {"id": "10", "title": "一次普通的产品复盘", "url": "https://example.com/posts/10", "published_at": "2026-06-30T08:00:00Z", "likes": 125, "views": 6800, "comments": 8, "shares": 6, "saves": 17},
+    {"id": "9", "title": "我怎样保存一条值得研究的内容", "url": "https://example.com/posts/9", "published_at": "2026-06-28T08:00:00Z", "likes": 120, "views": 6500, "comments": 9, "shares": 7, "saves": 22},
+    {"id": "8", "title": "内容分析里最容易误判的一件事", "url": "https://example.com/posts/8", "published_at": "2026-06-26T08:00:00Z", "likes": 115, "views": 6300, "comments": 11, "shares": 8, "saves": 19},
+    {"id": "7", "title": "工作台本周小更新", "url": "https://example.com/posts/7", "published_at": "2026-06-24T08:00:00Z", "likes": 110, "views": 6100, "comments": 7, "shares": 5, "saves": 14},
+    {"id": "6", "title": "值得长期观察的三个账号", "url": "https://example.com/posts/6", "published_at": "2026-06-22T08:00:00Z", "likes": 108, "views": 5900, "comments": 8, "shares": 7, "saves": 16},
+    {"id": "5", "title": "周末碎片：关于创作节奏", "url": "https://example.com/posts/5", "published_at": "2026-06-20T08:00:00Z", "likes": 105, "views": 5700, "comments": 6, "shares": 4, "saves": 12},
+    {"id": "4", "title": "怎样不被绝对播放量骗到", "url": "https://example.com/posts/4", "published_at": "2026-06-18T08:00:00Z", "likes": 100, "views": 5400, "comments": 10, "shares": 6, "saves": 15},
+    {"id": "3", "title": "一个选题从发现到发布", "url": "https://example.com/posts/3", "published_at": "2026-06-16T08:00:00Z", "likes": 98, "views": 5200, "comments": 5, "shares": 5, "saves": 11},
+    {"id": "2", "title": "今天整理了自己的声音库", "url": "https://example.com/posts/2", "published_at": "2026-06-14T08:00:00Z", "likes": 95, "views": 5000, "comments": 7, "shares": 3, "saves": 13},
+    {"id": "1", "title": "六月第二周创作记录", "url": "https://example.com/posts/1", "published_at": "2026-06-12T08:00:00Z", "likes": 90, "views": 4700, "comments": 4, "shares": 3, "saves": 9}
+  ]
+}
